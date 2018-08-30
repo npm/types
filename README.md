@@ -17,7 +17,7 @@ pkg.packument('libnpm').then((obj: npm.Packument) => {
 
 Make it easier for typescript users to work with npm registry content! 
 
-![vscode tooltip screenshot][./img/tool-tip.png]
+![vscode tooltip screenshot](./img/tool-tip.png)
 
 Types should have comments so documentation on npm object properties can appear in vscode contextual popups.
 
@@ -32,6 +32,8 @@ Types should have comments so documentation on npm object properties can appear 
 - npm.Packument
     - the document you get from `https://registry.npmjs.org/<package name here>`
 
+- npm.AbbreviatedPackument
+    - the document you get from `curl -H 'accept:application/vnd.npm.install-v1+json' https://registry.npmjs.org/<package name here>`
 
 ### subtypes
 
@@ -41,7 +43,10 @@ Types should have comments so documentation on npm object properties can appear 
 
 - npm.LockDependency
     - how package locks describe dependencies and sub dependencies
-    
+
+- npm.AbbreviatedVersion  
+    - the version object in an AbbreviatedPackument
+
 - npm.Dist
     - the object in npm.PackageVersion that holds the tarball location and checksums
 

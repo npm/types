@@ -27,8 +27,7 @@ export interface PackageJson {
   files?: string[];
   bin?: {[key: string]: string};
   man?: string|string[];
-  directories?:
-      {bin?: string, lib?: string, man?: string, doc?: string, test?: string};
+  directories?:Directories;
   /**
    * types for the package. unofficial but defacto for typescript.
    */
@@ -61,11 +60,31 @@ export interface Packument {
   // left out users (stars) deprecated, and attachments (does nothing)
   readmeFilename?: string;
 }
+  
+// https://docs.npmjs.com/files/package-lock.json
+export interface PackageLock {
+  name: string;
+  version: string;
+  lockfileVersion: number;
+  packageIntegrity?: string;
+  preserveSymlinks?: boolean;
+  requires?: boolean;
+  dependencies?: {[moduleName: string]: LockDependency};
+}
 
 export type Repository = {
   type?: string,
   url?: string
 }|string;
+
+interface Directories{
+  bin?: string;
+  lib?: string;
+  man?: string;
+  doc?: string;
+  test?: string;
+}
+
 
 // this is what you get for each version in the npm api response.
 export interface PackumentVersion extends PackageJson {
@@ -81,6 +100,37 @@ export interface PackumentVersion extends PackageJson {
   dist: Dist;
   _hasShrinkwrap?: boolean;
   types?: string;
+}
+
+/**
+ * abbreviated metadata format (aka corgi)
+ *  
+ * https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md#abbreviated-metadata-format
+ * returned from registry requests with accept header values conianing
+ * `application/vnd.npm.install-v1+json`
+ */
+export interface AbbreviatedPackument{
+  name:string;
+  modified:string;
+  'dist-tags':ObjectOfStrings;
+  versions:{[version:string]:AbbreviatedVersion}
+}
+
+export interface AbbreviatedVersion{
+  name:string;
+  version:string;
+  dependencies?:ObjectOfStrings;
+  optionalDependencies?:ObjectOfStrings;
+  devDependencies?:ObjectOfStrings;
+  bundleDependencies?:ObjectOfStrings;
+  bundledDependencies?:ObjectOfStrings;
+  peerDependencies?:ObjectOfStrings;
+  bin?:ObjectOfStrings;
+  _hasShrinkwrap?:boolean;
+  directories?:Directories;
+  dist:Dist;
+  engines:ObjectOfStrings;
+  deprecated?:string;
 }
 
 /**
@@ -145,17 +195,7 @@ export type NpmScripts = ObjectOfStrings&{
   preshrinkwrap?: string;
   postshrinkwrap?: string;
 };
-  
-// https://docs.npmjs.com/files/package-lock.json
-export interface PackageLock {
-  name: string;
-  version: string;
-  lockfileVersion: number;
-  packageIntegrity?: string;
-  preserveSymlinks?: boolean;
-  requires?: boolean;
-  dependencies?: {[moduleName: string]: LockDependency};
-}
+
 
 export interface LockDependency {
   version: string;
