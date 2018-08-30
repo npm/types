@@ -1,7 +1,7 @@
-import '../index.d.ts';
-
 import * as fs from 'fs';
 import * as path from 'path';
+
+import * as npm from '../';
 
 const getPackageJson = (): npm.PackageJson => {
   const pkg =
