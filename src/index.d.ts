@@ -128,4 +128,26 @@ declare namespace npm {
   interface ObjectOfStrings {
     [key: string]: string;
   }
+  
+  // https://docs.npmjs.com/files/package-lock.json
+  export interface PackageLock {
+    name: string;
+    version: string;
+    lockfileVersion: number;
+    packageIntegrity?: string;
+    preserveSymlinks?: boolean;
+    requires?: boolean;
+    dependencies?: {[moduleName: string]: Dependency};
+  }
+  
+  export interface Dependency {
+    version: string;
+    integrity?: string;
+    resolved?: string;
+    bundled?: boolean;
+    dev?: boolean;
+    optional?: boolean;
+    requires?: {[moduleName: string]: string};
+    dependencies?: {[moduleName: string]: Dependency};
+  }
 }
