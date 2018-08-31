@@ -1,6 +1,6 @@
 {
   "name": "@npm/types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Typescript definitions for npm registry content",
   "types": "./index.d.ts",
   "main": "",
