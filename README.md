@@ -53,7 +53,7 @@ Types should have comments so documentation on npm object properties can appear 
 - npm.NpmScripts
     - helpful object with all of the possible npm hooks
 
-- npm.Person
+- npm.Maintainer
     - common type for author, maintainers etc used in many objects
 
 - npm.Repository
