@@ -109,14 +109,14 @@ export interface PackumentVersion extends PackageJson {
  * returned from registry requests with accept header values conianing
  * `application/vnd.npm.install-v1+json`
  */
-export interface AbbreviatedPackument{
+export interface Manifest{
   name:string;
   modified:string;
   'dist-tags':ObjectOfStrings;
-  versions:{[version:string]:AbbreviatedVersion}
+  versions:{[version:string]:ManifestVersion}
 }
 
-export interface AbbreviatedVersion{
+export interface ManifestVersion{
   name:string;
   version:string;
   dependencies?:ObjectOfStrings;

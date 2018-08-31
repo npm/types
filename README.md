@@ -32,7 +32,7 @@ Types should have comments so documentation on npm object properties can appear 
 - npm.Packument
     - the document you get from `https://registry.npmjs.org/<package name here>`
 
-- npm.AbbreviatedPackument
+- npm.Manifest
     - the document you get from `curl -H 'accept:application/vnd.npm.install-v1+json' https://registry.npmjs.org/<package name here>`
 
 ### subtypes
@@ -44,7 +44,7 @@ Types should have comments so documentation on npm object properties can appear 
 - npm.LockDependency
     - how package locks describe dependencies and sub dependencies
 
-- npm.AbbreviatedVersion  
+- npm.ManifestVersion  
     - the version object in an AbbreviatedPackument
 
 - npm.Dist
