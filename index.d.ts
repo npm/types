@@ -12,10 +12,10 @@ export interface PackageJson {
    */
   keywords?: string[];
   /**
-   * "name <email> (website)" string or Person object
+   * "name <email> (website)" string or Maintainer object
    */
-  author?: Person;
-  contributors?: Person[];
+  author?: Maintainer;
+  contributors?: Maintainer[];
   license?: string;
   repository?: Repository;
   depedencies?: Dependencies;
@@ -49,12 +49,12 @@ export interface Packument {
   description?: string;
   'dist-tags': {latest?: string}&ObjectOfStrings;
   versions: {[key: string]: PackumentVersion};
-  maintainers: Person[];
+  maintainers: Maintainer[];
   time: {modified: string, created: string, [key: string]: string};
   homepage?: string;
   keywords?: string[];
   repository?: Repository;
-  author?: Person;
+  author?: Maintainer;
   bugs?: {url: string};
   license: string;
   // left out users (stars) deprecated, and attachments (does nothing)
@@ -95,8 +95,8 @@ export interface PackumentVersion extends PackageJson {
   id: string;
   npmVersion: string;
   nodeVersion: string;
-  npmUser: Person;
-  maintainers: Person[];
+  npmUser: Maintainer;
+  maintainers: Maintainer[];
   dist: Dist;
   _hasShrinkwrap?: boolean;
   types?: string;
@@ -208,7 +208,7 @@ export interface LockDependency {
   dependencies?: {[moduleName: string]: LockDependency};
 }
 
-export type Person = {
+export type Maintainer = {
   name?: string;
   email?: string;
   url?: string;
