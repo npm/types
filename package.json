@@ -1,12 +1,31 @@
 {
   "name": "@npm/types",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Typescript definitions for npm registry content",
+  "types": "./index.d.ts",
+  "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "test": "echo 'compilation worked!'"
   },
   "keywords": [],
   "author": "Chris Dickinson <chris@neversaw.us> (http://neversaw.us/)",
-  "license": "MIT"
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Ryan Day",
+      "email": "ryaneday@google.com"
+    }
+  ],
+  "devDependencies": {
+    "@types/node": "^10.9.3",
+    "gts": "^0.8.0",
+    "typescript": "~2.8.0"
+  }
 }
