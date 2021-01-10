@@ -18,7 +18,7 @@ export interface PackageJson {
   contributors?: Maintainer[];
   license?: string;
   repository?: Repository;
-  depedencies?: Dependencies;
+  dependencies?: Dependencies;
   devDependencies?: Dependencies;
   peerDependencies?: Dependencies;
   bundleDependencies?: Dependencies;
