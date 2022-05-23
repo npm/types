@@ -6,6 +6,7 @@
   },
   "include": [
     "index.d.ts",
+    "update-fixtures.ts",
     "src/*.ts",
     "src/**/*.ts",
     "test/*.ts",
