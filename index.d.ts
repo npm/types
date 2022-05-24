@@ -59,7 +59,7 @@ export interface Packument {
   repository?: Repository;
   author?: Maintainer;
   bugs?: {url: string};
-  license: string;
+  license?: string;
   // left out users (stars) deprecated, and attachments (does nothing)
   readmeFilename?: string;
 }

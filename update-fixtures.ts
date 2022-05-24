@@ -5,6 +5,8 @@ import * as prettier from "prettier";
 // Check the types against some actual examples from the npm registry.
 // Call pacote.manifest() and pacote.packument() with and without the fullMetadata option.
 // Embed the JSON results in TypeScript source files, then use the TypeScript compiler to confirm the corresponding types are compatible.
+writeManifestFixtures("not-licensed@1.0.0");
+writePackumentFixtures("not-licensed"); // Packument["license"] is optional.
 writeManifestFixtures("tiny-tarball@1.0.0");
 writePackumentFixtures("tiny-tarball");
 
