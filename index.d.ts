@@ -12,25 +12,31 @@ export interface PackageJson {
    */
   keywords?: string[];
   homepage?: string;
-  bugs?: {url: string};
+  bugs?: NonNullable<PackumentVersion['bugs']> | string;
   /**
    * "name <email> (website)" string or Maintainer object
    */
-  author?: Maintainer;
-  contributors?: Maintainer[];
+  author?: NonNullable<PackumentVersion['author']> | string;
+  contributors?: (
+    | NonNullable<PackumentVersion['contributors']>[number]
+    | string
+  )[];
   license?: string;
-  repository?: Repository;
+  repository?: NonNullable<PackumentVersion['repository']> | string;
   dependencies?: Dependencies;
   devDependencies?: Dependencies;
   peerDependencies?: Dependencies;
-  bundleDependencies?: Dependencies;
-  bundledDependencies?: Dependencies;
+  bundleDependencies?: NonNullable<PackageJson['bundledDependencies']>;
+  bundledDependencies?: string[] | boolean;
   optionalDependencies?: ObjectOfStrings;
   engines?: ObjectOfStrings;
   files?: string[];
   bin?: {[key: string]: string};
   man?: string|string[];
   directories?:Directories;
+  config?: Record<string, unknown>;
+  os?: string[];
+  cpu?: string[];
   /**
    * types for the package. unofficial but defacto for typescript.
    */
@@ -42,7 +48,7 @@ export interface PackageJson {
   /**
    * npm config values for publish time. like setting an alternate registry
    */
-  publishConfig?:ObjectOfStrings;
+  publishConfig?: Record<string, unknown>;
   [field: string]: unknown;
 }
 
@@ -50,10 +56,10 @@ export interface PackageJson {
 export type Packument = {
   _id: string;
   _rev: string;
-  'dist-tags': {latest?: string}&ObjectOfStrings;
+  'dist-tags': {latest: string}&ObjectOfStrings;
   versions: {[key: string]: PackumentVersion};
   time: {modified: string, created: string, [key: string]: string};
-  // left out users (stars) deprecated, and attachments (does nothing)
+  users?: Record<string, true>;
   // The following fields are hoisted to the top-level of the packument from the latest version published.
 } & Pick<
   PackumentVersion,
@@ -82,10 +88,11 @@ export interface PackageLock {
   dependencies?: {[moduleName: string]: LockDependency};
 }
 
-export type Repository = {
-  type?: string,
-  url?: string
-}|string;
+export interface Repository {
+  type?: string;
+  url: string;
+  directory?: string;
+}
 
 interface Directories{
   bin?: string;
@@ -98,6 +105,14 @@ interface Directories{
 
 // this is what you get for each version in the npm api response.
 export interface PackumentVersion extends PackageJson {
+  // bugs, author, contributors, and repository can be simple strings in package.json, but not in registry metadata.
+  bugs?: {
+    url?: string;
+    email?: string;
+  };
+  author?: Maintainer;
+  contributors?: Maintainer[];
+  repository?: Repository;
   gitHead?: string;
   /**
    * packagename@versionstring
@@ -218,12 +233,11 @@ export interface LockDependency {
   dependencies?: {[moduleName: string]: LockDependency};
 }
 
-export type Maintainer = {
-  name?: string;
+export interface Maintainer {
+  name: string;
   email?: string;
   url?: string;
-}|string;
-
+}
 
 interface ObjectOfStrings {
   [key: string]: string;
