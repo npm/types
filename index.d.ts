@@ -18,14 +18,14 @@ export interface PackageJson {
   contributors?: Maintainer[];
   license?: string;
   repository?: Repository;
-  dependencies?: Dependencies;
-  devDependencies?: Dependencies;
-  peerDependencies?: Dependencies;
-  bundleDependencies?: Dependencies;
-  bundledDependencies?: Dependencies;
-  engines?: ObjectOfStrings;
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
+  peerDependencies?: Record<string, string>;
+  bundleDependencies?: Record<string, string>;
+  bundledDependencies?: Record<string, string>;
+  engines?: Record<string, string>;
   files?: string[];
-  bin?: {[key: string]: string};
+  bin?: Record<string, string>;
   man?: string|string[];
   directories?:Directories;
   /**
@@ -39,7 +39,7 @@ export interface PackageJson {
   /**
    * npm config values for publish time. like setting an alternate registry
    */
-  publishConfig?:ObjectOfStrings;
+  publishConfig?:Record<string, string>;
 }
 
 // this is what you get from the npm api.
@@ -47,10 +47,10 @@ export interface Packument {
   name: string;
   readme?: string;
   description?: string;
-  'dist-tags': {latest?: string}&ObjectOfStrings;
-  versions: {[key: string]: PackumentVersion};
+  'dist-tags': {latest?: string}&Record<string, string>;
+  versions: Record<string, PackumentVersion>;
   maintainers: Maintainer[];
-  time: {modified: string, created: string, [key: string]: string};
+  time: Record<string, string> & {modified: string; created: string};
   homepage?: string;
   keywords?: string[];
   repository?: Repository;
@@ -69,7 +69,7 @@ export interface PackageLock {
   packageIntegrity?: string;
   preserveSymlinks?: boolean;
   requires?: boolean;
-  dependencies?: {[moduleName: string]: LockDependency};
+  dependencies?: Record<string, LockDependency>;
 }
 
 export type Repository = {
@@ -112,24 +112,24 @@ export interface PackumentVersion extends PackageJson {
 export interface Manifest{
   name:string;
   modified:string;
-  'dist-tags':ObjectOfStrings;
-  versions:{[version:string]:ManifestVersion}
+  'dist-tags':Record<string, string>;
+  versions:Record<string, ManifestVersion>
 }
 
 export interface ManifestVersion{
   name:string;
   version:string;
-  dependencies?:ObjectOfStrings;
-  optionalDependencies?:ObjectOfStrings;
-  devDependencies?:ObjectOfStrings;
-  bundleDependencies?:ObjectOfStrings;
-  bundledDependencies?:ObjectOfStrings;
-  peerDependencies?:ObjectOfStrings;
-  bin?:ObjectOfStrings;
+  dependencies?:Record<string, string>;
+  optionalDependencies?:Record<string, string>;
+  devDependencies?:Record<string, string>;
+  bundleDependencies?:Record<string, string>;
+  bundledDependencies?:Record<string, string>;
+  peerDependencies?:Record<string, string>;
+  bin?:Record<string, string>;
   _hasShrinkwrap?:boolean;
   directories?:Directories;
   dist:Dist;
-  engines:ObjectOfStrings;
+  engines:Record<string, string>;
   deprecated?:string;
 }
 
@@ -167,7 +167,7 @@ export interface Dist {
 }
 
 // https://docs.npmjs.com/misc/scripts
-export type NpmScripts = ObjectOfStrings&{
+export type NpmScripts = Record<string, string>&{
   test?: string;
   pretest?: string;
   posttest?: string;
@@ -204,8 +204,8 @@ export interface LockDependency {
   bundled?: boolean;
   dev?: boolean;
   optional?: boolean;
-  requires?: {[moduleName: string]: string};
-  dependencies?: {[moduleName: string]: LockDependency};
+  requires?: Record<string, string>;
+  dependencies?: Record<string, LockDependency>;
 }
 
 export type Maintainer = {
@@ -213,12 +213,3 @@ export type Maintainer = {
   email?: string;
   url?: string;
 }|string;
-
-
-interface ObjectOfStrings {
-  [key: string]: string;
-}
-
-interface Dependencies {
-  [moduleName: string]: string;
-}
