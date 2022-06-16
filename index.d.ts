@@ -11,6 +11,8 @@ export interface PackageJson {
    * these help npm searches find your project
    */
   keywords?: string[];
+  homepage?: string;
+  bugs?: {url: string};
   /**
    * "name <email> (website)" string or Maintainer object
    */
@@ -23,6 +25,7 @@ export interface PackageJson {
   peerDependencies?: Dependencies;
   bundleDependencies?: Dependencies;
   bundledDependencies?: Dependencies;
+  optionalDependencies?: ObjectOfStrings;
   engines?: ObjectOfStrings;
   files?: string[];
   bin?: {[key: string]: string};
@@ -40,27 +43,34 @@ export interface PackageJson {
    * npm config values for publish time. like setting an alternate registry
    */
   publishConfig?:ObjectOfStrings;
+  [field: string]: unknown;
 }
 
 // this is what you get from the npm api.
-export interface Packument {
-  name: string;
-  readme?: string;
-  description?: string;
+export type Packument = {
+  _id: string;
+  _rev: string;
   'dist-tags': {latest?: string}&ObjectOfStrings;
   versions: {[key: string]: PackumentVersion};
-  maintainers: Maintainer[];
   time: {modified: string, created: string, [key: string]: string};
-  homepage?: string;
-  keywords?: string[];
-  repository?: Repository;
-  author?: Maintainer;
-  bugs?: {url: string};
-  license: string;
   // left out users (stars) deprecated, and attachments (does nothing)
-  readmeFilename?: string;
-}
-  
+  // The following fields are hoisted to the top-level of the packument from the latest version published.
+} & Pick<
+  PackumentVersion,
+  | 'author'
+  | 'bugs'
+  | 'contributors'
+  | 'description'
+  | 'homepage'
+  | 'keywords'
+  | 'license'
+  | 'maintainers'
+  | 'name'
+  | 'readme'
+  | 'readmeFilename'
+  | 'repository'
+>;
+
 // https://docs.npmjs.com/files/package-lock.json
 export interface PackageLock {
   name: string;
@@ -92,14 +102,16 @@ export interface PackumentVersion extends PackageJson {
   /**
    * packagename@versionstring
    */
-  id: string;
-  npmVersion: string;
-  nodeVersion: string;
-  npmUser: Maintainer;
+  _id: string;
+  _npmVersion: string;
+  _nodeVersion: string;
+  _npmUser: Maintainer;
   maintainers: Maintainer[];
   dist: Dist;
+  readme?: string;
+  readmeFilename?: string;
   _hasShrinkwrap?: boolean;
-  types?: string;
+  deprecated?: string;
 }
 
 /**
@@ -109,29 +121,27 @@ export interface PackumentVersion extends PackageJson {
  * returned from registry requests with accept header values conianing
  * `application/vnd.npm.install-v1+json`
  */
-export interface Manifest{
-  name:string;
+export type Manifest = {
   modified:string;
-  'dist-tags':ObjectOfStrings;
   versions:{[version:string]:ManifestVersion}
-}
+} & Pick<Packument, 'name' | 'dist-tags'>;
 
-export interface ManifestVersion{
-  name:string;
-  version:string;
-  dependencies?:ObjectOfStrings;
-  optionalDependencies?:ObjectOfStrings;
-  devDependencies?:ObjectOfStrings;
-  bundleDependencies?:ObjectOfStrings;
-  bundledDependencies?:ObjectOfStrings;
-  peerDependencies?:ObjectOfStrings;
-  bin?:ObjectOfStrings;
-  _hasShrinkwrap?:boolean;
-  directories?:Directories;
-  dist:Dist;
-  engines:ObjectOfStrings;
-  deprecated?:string;
-}
+export type ManifestVersion = Pick<
+  PackumentVersion,
+  | 'name'
+  | 'version'
+  | 'bin'
+  | 'directories'
+  | 'dependencies'
+  | 'devDependencies'
+  | 'peerDependencies'
+  | 'bundledDependencies'
+  | 'optionalDependencies'
+  | 'engines'
+  | 'dist'
+  | '_hasShrinkwrap'
+  | 'deprecated'
+>;
 
 /**
  * Dists are properties of Packument.versions
