@@ -21,8 +21,11 @@ export interface PackageJson {
   dependencies?: Dependencies;
   devDependencies?: Dependencies;
   peerDependencies?: Dependencies;
+  peerDependenciesMeta: { [moduleName: string]: { optional: true } };
   bundleDependencies?: Dependencies;
   bundledDependencies?: Dependencies;
+  optionalDependencies: Dependencies;
+  overrides: Dependencies;
   engines?: ObjectOfStrings;
   files?: string[];
   bin?: {[key: string]: string};
@@ -32,6 +35,10 @@ export interface PackageJson {
    * types for the package. unofficial but defacto for typescript.
    */
   types?: string;
+
+  // https://nodejs.org/api/packages.html#type
+  type?: 'module' | 'commonjs';
+
   /**
    * prevents npm publish
    */
@@ -40,6 +47,16 @@ export interface PackageJson {
    * npm config values for publish time. like setting an alternate registry
    */
   publishConfig?:ObjectOfStrings;
+
+  bugs?: { email?: string; url: string };
+  cpu?: { [key: string]: string };
+  funding?:
+    | string
+    | { type: string; url: string }
+    | (string | { type: string; url: string })[];
+  homepage?: string;
+  os?: string[];
+  workspaces?: string[];
 }
 
 // this is what you get from the npm api.
@@ -55,7 +72,7 @@ export interface Packument {
   keywords?: string[];
   repository?: Repository;
   author?: Maintainer;
-  bugs?: {url: string};
+  bugs?: { email?: string; url: string };
   license: string;
   // left out users (stars) deprecated, and attachments (does nothing)
   readmeFilename?: string;
@@ -97,6 +114,7 @@ export interface PackumentVersion extends PackageJson {
   nodeVersion: string;
   npmUser: Maintainer;
   maintainers: Maintainer[];
+  deprecated?: string;
   dist: Dist;
   _hasShrinkwrap?: boolean;
   types?: string;
