@@ -3,7 +3,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import t from 'tap'
 
-import type * as npm from '../src/index.d.ts'
+import type * as npm from '../src/index.ts'
 
 t.test('types', async () => {
   const dir = dirname(fileURLToPath(import.meta.url))
