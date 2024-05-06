@@ -2,20 +2,33 @@
   "name": "@npm/types",
   "version": "1.0.2",
   "description": "Typescript definitions for npm registry content",
-  "types": "./index.d.ts",
-  "main": "",
+  "main": "./dist/commonjs/index.js",
+  "types": "./dist/commonjs/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "check": "gts check",
-    "clean": "gts clean",
-    "compile": "tsc -p .",
-    "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run check",
-    "test": "echo 'compilation worked!'"
+    "template-oss-apply": "template-oss-apply --force",
+    "lintfix": "npm run lint -- --fix",
+    "snap": "tap",
+    "lint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
+    "postlint": "template-oss-check",
+    "test": "tap",
+    "posttest": "npm run lint",
+    "prepare": "tshy"
   },
   "keywords": [],
-  "author": "Chris Dickinson <chris@neversaw.us> (http://neversaw.us/)",
+  "author": "GitHub Inc.",
   "license": "MIT",
   "contributors": [
     {
@@ -24,10 +37,36 @@
     }
   ],
   "devDependencies": {
+    "@npmcli/eslint-config": "^4.0.4",
+    "@npmcli/template-oss": "4.22.0",
     "@types/node": "^17.0.31",
-    "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
-    "gts": "^3.1.0",
-    "typescript": "~4.6.4"
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "tap": "^18.7.3",
+    "tshy": "^1.14.0",
+    "typescript": "^5.4.5"
+  },
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npm/types.git"
+  },
+  "templateOSS": {
+    "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
+    "version": "4.22.0",
+    "typescript": true
+  },
+  "type": "module",
+  "tap": {
+    "typecheck": true,
+    "disable-coverage": true
+  },
+  "tshy": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts"
+    }
   }
 }

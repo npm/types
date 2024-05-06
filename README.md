@@ -17,7 +17,7 @@ pkg.packument('libnpm').then((obj: npm.Packument) => {
 
 Make it easier for typescript users to work with npm registry content! 
 
-![vscode tooltip screenshot](./img/tool-tip.png)
+![vscode tooltip screenshot](./docs/tool-tip.png)
 
 Types should have comments so documentation on npm object properties can appear in vscode contextual popups.
 

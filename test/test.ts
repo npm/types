@@ -1,16 +1,13 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import { readFile } from 'fs/promises'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import t from 'tap'
 
-import * as npm from '../';
+import type * as npm from '../src/index.ts'
 
-const getPackageJson = (): npm.PackageJson => {
-  const pkg =
-      JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')) + '') as
-      npm.PackageJson;
-  return pkg;
-};
-
-const pkg = getPackageJson();
-
-console.log(pkg.name);
-console.log(pkg.version.substring, 'yay version is required and a string');
+t.test('types', async () => {
+  const dir = dirname(fileURLToPath(import.meta.url))
+  const f = await readFile(join(dir, '../package.json'), 'utf-8')
+  const pkg = JSON.parse(f) as npm.PackageJson
+  t.ok(pkg.name)
+})
