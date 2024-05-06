@@ -1,14 +1,11 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "build"
+    "declaration": false,
+    "module": "esnext",
+    "lib": [ "esnext" ],
+    "moduleResolution": "node",
+    "outDir": "build",
+    "target": "esnext"
   },
-  "include": [
-    "index.d.ts",
-    "src/*.ts",
-    "src/**/*.ts",
-    "test/*.ts",
-    "test/**/*.ts"
-  ]
+  "include": [ "test/fixtures.test.ts" ],
 }

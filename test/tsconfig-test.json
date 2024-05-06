@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "fixtures",
+    "target": "ESNext",
+    "noEmit": true
+  },
+  "include": [ "fixtures" ]
+}
