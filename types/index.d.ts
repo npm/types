@@ -58,7 +58,7 @@ export interface PackageJson {
   private?: boolean;
   publishConfig?: Record<string, unknown>;
   repository?: NonNullable<PackumentVersion['repository']> | string;
-  scripts?: NpmScripts;
+  scripts?: Record<string, string>;
   types?: string;
   version: string;
 
@@ -199,37 +199,9 @@ export interface Signature {
   sig: string;
 }
 
-type NPMScriptsKeys =
-  | 'test'
-  | 'pretest'
-  | 'posttest'
-  | 'install'
-  | 'preinstall'
-  | 'postinstall'
-  | 'uninstall'
-  | 'preuninstall'
-  | 'postuninstall'
-  | 'prepublish'
-  | 'prepare'
-  | 'prepublishOnly'
-  | 'prepack'
-  | 'postpack'
-  | 'version'
-  | 'preversion'
-  | 'postversion'
-  | 'stop'
-  | 'prestop'
-  | 'poststop'
-  | 'restart'
-  | 'prerestart'
-  | 'postrestart'
-  | 'shrinkwrap'
-  | 'preshrinkwrap'
-  | 'postshrinkwrap';
-
-// https://docs.npmjs.com/misc/scripts
-export type NpmScripts = Record<NPMScriptsKeys | string, string>;
-
+// TODO: Remove?
+//
+// The NPM registry doesn't publish lock files, so having this type here is a bit... awkward
 export interface LockDependency {
   version: string;
   integrity?: string;
