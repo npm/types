@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "declaration": false,
-    "module": "esnext",
-    "lib": [ "esnext" ],
-    "moduleResolution": "node",
-    "outDir": "build",
-    "target": "esnext"
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2022",
+    "module": "nodenext"
   },
   "include": [ "test/fixtures.test.ts" ],
 }

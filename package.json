@@ -1,35 +1,66 @@
 {
   "name": "@npm/types",
   "version": "1.0.2",
-  "license": "MIT",
   "description": "Typescript definitions for npm registry content",
-  "type": "module",
+  "main": "./dist/commonjs/index.js",
   "types": "./types/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "template-oss-apply": "template-oss-apply --force",
+    "lintfix": "npm run lint -- --fix",
+    "snap": "tap",
+    "lint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
+    "postlint": "template-oss-check",
+    "test": "tap",
+    "posttest": "npm run lint",
+    "prepare": "tshy"
+  },
+  "keywords": [
+    "npm registry",
+    "types",
+    "typescript",
+    "definitions",
+    "typings"
+  ],
+  "author": "GitHub Inc.",
+  "license": "MIT",
   "engines": {
     "node": ">=18"
   },
-  "files": [
-    "types"
-  ],
-  "scripts": {
-    "clean": "rm -fr build",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "fix": "eslint --fix .",
-    "lint": "eslint .",
-    "test": "node --enable-source-maps --test build/fixtures.test.js",
-    "test:watch": "node --enable-source-maps --test --watch build/fixtures.test.js"
-  },
   "devDependencies": {
-    "@eslint/js": "9.2.0",
-    "@types/node": "20.12.8",
-    "eslint": "8.57.0",
-    "globals": "15.1.0",
-    "prettier": "3.2.5",
-    "typescript": "~5.4.5",
-    "typescript-eslint": "7.8.0"
+    "@npmcli/eslint-config": "^4.0.4",
+    "@npmcli/template-oss": "4.22.0",
+    "@types/node": "^17.0.31",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "tap": "^18.7.3",
+    "tshy": "^1.14.0",
+    "typescript": "^5.4.5"
+  },
+  "files": [
+    "types/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npm/types.git"
+  },
+  "templateOSS": {
+    "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
+    "version": "4.22.0",
+    "typescript": true
+  },
+  "type": "module",
+  "tap": {
+    "typecheck": true,
+    "disable-coverage": true
+  },
+  "tshy": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts"
+    }
   },
   "packageManager": "npm@10.7.0+sha256.f443ed4364ea11ac5cf7cae7fb4731278c64dd6839093f8a46eabde0430e0fcd"
 }
