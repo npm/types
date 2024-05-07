@@ -11,6 +11,6 @@
     "noEmit": true
   },
   "include": [
-    "test/fixtures.test.ts"
+    "test/fixtures.ts"
   ]
 }

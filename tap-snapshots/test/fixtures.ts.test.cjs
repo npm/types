@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > not-licensed.manifest.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > not-licensed.manifest.ts 1`] = `
 export const metadata: npmTypes.Manifest = {
   "name": "not-licensed",
   "dist-tags": {
@@ -32,7 +32,7 @@ export const metadata: npmTypes.Manifest = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > not-licensed.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > not-licensed.ts 1`] = `
 export const metadata: npmTypes.Packument = {
   "_id": "not-licensed",
   "_rev": "3-5e8502a05053da7c2cb1b51f8a08a0ec",
@@ -122,7 +122,7 @@ export const metadata: npmTypes.Packument = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > not-licensed@1.0.0.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > not-licensed@1.0.0.ts 1`] = `
 export const metadata: npmTypes.PackumentVersion = {
   "name": "not-licensed",
   "version": "1.0.0",
@@ -175,7 +175,7 @@ export const metadata: npmTypes.PackumentVersion = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > tiny-tarball.manifest.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > tiny-tarball.manifest.ts 1`] = `
 export const metadata: npmTypes.Manifest = {
   "name": "tiny-tarball",
   "dist-tags": {
@@ -202,7 +202,7 @@ export const metadata: npmTypes.Manifest = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > tiny-tarball.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > tiny-tarball.ts 1`] = `
 export const metadata: npmTypes.Packument = {
   "_id": "tiny-tarball",
   "_rev": "5-6e3e9084c69f16db2d53a953e67d0f9e",
@@ -274,7 +274,7 @@ export const metadata: npmTypes.Packument = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > tiny-tarball@1.0.0.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > tiny-tarball@1.0.0.ts 1`] = `
 export const metadata: npmTypes.PackumentVersion = {
   "name": "tiny-tarball",
   "version": "1.0.0",
@@ -317,7 +317,7 @@ export const metadata: npmTypes.PackumentVersion = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > uuid@0.0.2.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > uuid@0.0.2.ts 1`] = `
 export const metadata: npmTypes.PackumentVersion = {
   "name": "uuid",
   "description": "Simple libuuid bindings to allow UUIDs to be generated from JS.",
@@ -365,7 +365,7 @@ export const metadata: npmTypes.PackumentVersion = {
 }
 `
 
-exports[`test/fixtures.test.ts > TAP > fixtures > snapshots > uuid@1.4.1.ts 1`] = `
+exports[`test/fixtures.ts > TAP > fixtures > snapshots > uuid@1.4.1.ts 1`] = `
 export const metadata: npmTypes.PackumentVersion = {
   "name": "uuid",
   "version": "1.4.1",
