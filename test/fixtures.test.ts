@@ -9,13 +9,13 @@ const exec = promisify(_exec)
 
 const REGISTRY = 'https://registry.npmjs.org'
 
-type TestEntry = {
+type FixtureEntry = {
   name: string;
   version?: string;
   manifestFormat?: boolean;
 };
 
-const TESTS: TestEntry[] = [
+const FIXTURES: FixtureEntry[] = [
   { name: 'not-licensed', version: '1.0.0' },
   { name: 'not-licensed' },
   { name: 'tiny-tarball', version: '1.0.0' },
@@ -28,8 +28,9 @@ const TESTS: TestEntry[] = [
 
 /**
  * Unit test for types.  Does the following...
- * 1. For each TESTS url, fetches the registry data
- * 2. ... generates a TS fixture file that assigns the data to a variable with the appropriate type
+ * 1. For each FIXTURES url, fetches the registry data
+ * 2. ... generates a TS fixture file that assigns the data to a variable with
+ *    the appropriate type
  * 3. Runs `tsc` to validate registry data matches the type definition.
  */
 async function main () {
@@ -61,7 +62,7 @@ async function generateFixtures () {
 
   await mkdir('fixtures', { recursive: true })
 
-  for (const testEntry of TESTS) {
+  for (const testEntry of FIXTURES) {
     const { name, version } = testEntry
     const fixtureName = version ? `${name}@${version}` : name
 
@@ -98,7 +99,7 @@ async function generateFixtures () {
 // intended to document the types returned by registry requests.  Fetching URLs
 // directly here insures there's no manipulation of the data between the
 // registry and the fixture.
-async function registryFetch ({ name, version, manifestFormat }: TestEntry) {
+async function registryFetch ({ name, version, manifestFormat }: FixtureEntry) {
   const url = new URL(version ? `/${name}/${version}` : `/${name}`, REGISTRY)
 
   const headers: Record<string, string> = {}
