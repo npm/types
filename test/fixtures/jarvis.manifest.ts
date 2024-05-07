@@ -1,4 +1,4 @@
-import type * as npmTypes from '../../types/index.d.ts';
+import type * as npmTypes from '../../types/index.d.ts'
 
 export const metadata: npmTypes.Manifest = {
   name: 'jarvis',
@@ -32,4 +32,4 @@ export const metadata: npmTypes.Manifest = {
     },
   },
   modified: '2022-06-19T03:44:10.949Z',
-};
+}

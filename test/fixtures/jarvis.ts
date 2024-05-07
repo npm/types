@@ -1,4 +1,4 @@
-import type * as npmTypes from '../../types/index.d.ts';
+import type * as npmTypes from '../../types/index.d.ts'
 
 export const metadata: npmTypes.Packument = {
   _id: 'jarvis',
@@ -62,4 +62,4 @@ export const metadata: npmTypes.Packument = {
     created: '2011-09-10T14:23:33.696Z',
     '0.0.1': '2011-09-10T14:23:35.053Z',
   },
-};
+}

@@ -1,27 +1,24 @@
 /* This file is automatically added by @npmcli/template-oss. Do not edit. */
 
-'use strict'
+'use strict';
 
-const { readdirSync: readdir } = require('fs')
+const { readdirSync: readdir } = require('fs');
 
 const localConfigs = readdir(__dirname)
   .filter((file) => file.startsWith('.eslintrc.local.'))
-  .map((file) => `./${file}`)
+  .map((file) => `./${file}`);
 
 module.exports = {
   root: true,
-  ignorePatterns: [
-    'tap-testdir*/',
-    'dist/',
-  ],
+  ignorePatterns: ['dist/'],
   parser: '@typescript-eslint/parser',
   settings: {
     'import/resolver': {
       typescript: {},
     },
   },
-  extends: [
-    '@npmcli',
-    ...localConfigs,
-  ],
-}
+  rules: {
+    'max-len': 'off',
+  },
+  extends: ['@npmcli', ...localConfigs],
+};
