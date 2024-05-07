@@ -7,7 +7,6 @@ on:
   pull_request:
   push:
     branches:
-      - main
   schedule:
     # "At 09:00 UTC (02:00 PT) on Monday" https://crontab.guru/#0_9_*_*_1
     - cron: "0 9 * * 1"
