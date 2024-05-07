@@ -74,7 +74,7 @@ export interface Dist {
 }
 
 // this is in the tarball or the project. it really could have anything in it.
-export interface PackageJson {
+export interface PackageJSON {
   author?: Maintainer | string;
   bin?: Record<string, string>;
   browser?: Record<string, string> | string;
@@ -109,7 +109,7 @@ export interface PackageJson {
   [field: string]: unknown;
 }
 
-export interface PackumentVersion extends PackageJson {
+export interface PackumentVersion extends PackageJSON {
   // bugs, author, contributors, and repository can be simple strings in
   // package.json, but not in registry metadata.
   bugs?: Contact;
