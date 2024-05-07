@@ -75,9 +75,6 @@ export interface Dist {
 
 // this is in the tarball or the project. it really could have anything in it.
 export interface PackageJson {
-  /**
-   * "name <email> (website)" string or Maintainer object
-   */
   author?: Maintainer | string;
   bin?: Record<string, string>;
   browser?: Record<string, string> | string;
@@ -163,31 +160,6 @@ export type Packument = {
   | 'readmeFilename'
   | 'repository'
 >;
-
-// TODO: Remove?
-//
-// The NPM registry doesn't publish lock files, so having this type here is a bit... awkward
-export interface LockDependency {
-  version: string;
-  integrity?: string;
-  resolved?: string;
-  bundled?: boolean;
-  dev?: boolean;
-  optional?: boolean;
-  requires?: Record<string, string>;
-  dependencies?: Record<string, LockDependency>;
-}
-
-// https://docs.npmjs.com/files/package-lock.json
-export interface PackageLock {
-  dependencies?: Record<string, LockDependency>;
-  lockfileVersion: number;
-  name: string;
-  packageIntegrity?: string;
-  preserveSymlinks?: boolean;
-  requires?: boolean;
-  version: string;
-}
 
 export type ManifestVersion = Pick<
   PackumentVersion,
