@@ -12,6 +12,7 @@
     "lintfix": "npm run lint -- --fix",
     "postlint": "template-oss-check",
     "posttest": "npm run lint",
+    "pretest": "npm run build",
     "template-oss-apply": "template-oss-apply --force",
     "test": "node --test --enable-source-maps"
   },
