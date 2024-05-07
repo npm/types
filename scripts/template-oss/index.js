@@ -17,4 +17,7 @@ export default {
   allowPaths: [
     '/types/',
   ],
+  latestCiVersion: 18,
+  windowsCI: false,
+  macCI: false,
 }

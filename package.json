@@ -27,7 +27,7 @@
   "author": "GitHub Inc.",
   "license": "MIT",
   "engines": {
-    "node": "^18.6.0 || >=20"
+    "node": ">=18.6.0"
   },
   "devDependencies": {
     "@npmcli/eslint-config": "^4.0.4",
