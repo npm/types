@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": true,
     "module": "nodenext",
@@ -11,5 +12,7 @@
     "strict": true,
     "target": "es2022"
   },
-  "include": [ "test/fixtures.test.ts" ],
+  "include": [
+    "test/fixtures.test.ts"
+  ]
 }
