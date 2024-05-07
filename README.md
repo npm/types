@@ -20,15 +20,15 @@ fetch('https://registry.npmjs.org/cookie)
 Type for data returned from by the `https://registry.npmjs.org/:packageName` endpoint
 
 ### PackumentVersion
-Type for data returned from by the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint.  Also the type of `Packument['versions']`
+Type for data returned from by the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint.  Also the type of `Packument['versions']` entries.
 
 ### Manifest
-Type for data returned from by the `https://registry.npmjs.org/:packageName` __when made with the 'Accept: application/vnd.npm.install-v1+json' header__
+Type for data returned from by the `https://registry.npmjs.org/:packageName` _when made with the 'Accept: application/vnd.npm.install-v1+json' header_
 
 ### ManifestVersion
-Type for data returned from by the `https://registry.npmjs.org/:packageName/:packageVersion` __when made with the 'Accept: application/vnd.npm.install-v1+json' header__
+Type for data returned from by the `https://registry.npmjs.org/:packageName/:packageVersion` _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.   Also the type of `Manifest['versions']` entries.
 
 ### PackageJSON
-"package.json" file type.
+A "loose" definition of the "package.json" file type.
 
-> [!NOTE] This is a "loose" definition of the package.json structure, and is provided here only to the extent in which it aids in the definiton of the `PackumentVersion` type.
+> [!NOTE] This is not an authoritative definition of package.json structures.  It is merely a best-effort attempt to define the fields that may appear in `PackumentVersion` structures, are copied from a module's package.json file.
