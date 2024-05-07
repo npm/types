@@ -1,60 +1,34 @@
 # @npm/types
 
-Typescript definitions for npm registry content
+Typescript definitions for npm registry endpoints
+
+For example:
 
 ```typescript
 import * as npm from '@npm/types';
 
-const pkg = require('pacote');
-
-pkg.packument('libnpm').then((obj: npm.Packument) => {
-  console.log(obj.name, 'is the name of the package');
-});
-
+fetch('https://registry.npmjs.org/cookie)
+  .then((res) => res.json())
+  .then((obj: npm.Packument) => {
+    // `obj` has proper registry types!
+  })
 ```
 
-## GOAL
+## Types
 
-Make it easier for typescript users to work with npm registry content! 
+### Packument
+Response type for the `https://registry.npmjs.org/:packageName` endpoint
 
-![vscode tooltip screenshot](./docs/tool-tip.png)
+### PackumentVersion
+Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint.  Also the type of `Packument['versions']` entries.
 
-Types should have comments so documentation on npm object properties can appear in vscode contextual popups.
+### Manifest
+Response type for the `https://registry.npmjs.org/:packageName` endpoint, _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.
 
-## types
+### ManifestVersion
+Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint, _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.   Also the type of `Manifest['versions']` entries.
 
-- npm.PackageJson
-    - the object in the json file you have in your project
+### PackageJSON
+A "loose" definition of the "package.json" file type.
 
-- npm.PackageLock
-    - the file generated for you by npm that pins your deps.
-
-- npm.Packument
-    - the document you get from `https://registry.npmjs.org/<package name here>`
-
-- npm.Manifest
-    - the document you get from `curl -H 'accept:application/vnd.npm.install-v1+json' https://registry.npmjs.org/<package name here>`
-
-### subtypes
-
-
-- npm.PackageVersion
-    - the objects in the version fields of Packuments
-
-- npm.LockDependency
-    - how package locks describe dependencies and sub dependencies
-
-- npm.ManifestVersion  
-    - the version object in an AbbreviatedPackument
-
-- npm.Dist
-    - the object in npm.PackageVersion that holds the tarball location and checksums
-
-- npm.NpmScripts
-    - helpful object with all of the possible npm hooks
-
-- npm.Maintainer
-    - common type for author, maintainers etc used in many objects
-
-- npm.Repository
-    - string or object of repo data
+> [!NOTE] This is not an authoritative definition of package.json structures.  It is merely a best-effort attempt to define the fields that may appear in `PackumentVersion` structures, are copied from a module's package.json file.

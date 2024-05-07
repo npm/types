@@ -47,8 +47,8 @@ jobs:
         uses: actions/setup-node@v4
         id: node
         with:
-          node-version: 22.x
-          check-latest: contains('22.x', '.x')
+          node-version: 18.x
+          check-latest: contains('18.x', '.x')
       - name: Install Latest npm
         uses: ./.github/actions/install-latest-npm
         with:
@@ -77,20 +77,9 @@ jobs:
           - name: Linux
             os: ubuntu-latest
             shell: bash
-          - name: macOS
-            os: macos-latest
-            shell: bash
-          - name: macOS
-            os: macos-13
-            shell: bash
-          - name: Windows
-            os: windows-latest
-            shell: cmd
         node-version:
-          - 22.x
-        exclude:
-          - platform: { name: macOS, os: macos-13, shell: bash }
-            node-version: 22.x
+          - 18.6.0
+          - 18.x
     runs-on: ${{ matrix.platform.os }}
     defaults:
       run:

@@ -39,8 +39,8 @@ jobs:
         uses: actions/setup-node@v4
         id: node
         with:
-          node-version: 22.x
-          check-latest: contains('22.x', '.x')
+          node-version: 18.x
+          check-latest: contains('18.x', '.x')
       - name: Install Latest npm
         uses: ./.github/actions/install-latest-npm
         with:
@@ -119,8 +119,8 @@ jobs:
         uses: actions/setup-node@v4
         id: node
         with:
-          node-version: 22.x
-          check-latest: contains('22.x', '.x')
+          node-version: 18.x
+          check-latest: contains('18.x', '.x')
       - name: Install Latest npm
         uses: ./.github/actions/install-latest-npm
         with:
@@ -131,7 +131,7 @@ jobs:
         id: comment-text
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm exec --offline -- template-oss-release-manager --pr="${{ needs.release.outputs.pr-number }}" --backport="" --defaultTag="latest"
+        run: npm exec --offline -- template-oss-release-manager --pr="${{ needs.release.outputs.pr-number }}" --backport="" --defaultTag="latest" --publish
       - name: Append Release Manager Comment
         uses: peter-evans/create-or-update-comment@v3
         with:
@@ -243,6 +243,10 @@ jobs:
     name: Release Integration
     if: needs.release.outputs.releases
     uses: ./.github/workflows/release-integration.yml
+    permissions:
+      id-token: write
+    secrets:
+      PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
     with:
       releases: ${{ needs.release.outputs.releases }}
 
