@@ -1,18 +1,15 @@
-export interface Contact {
+interface Contact {
   email?: string;
   url?: string;
-}
-
-export interface Maintainer extends Contact {
   name: string;
 }
 
-export interface Signature {
+interface Signature {
   keyid: string;
   sig: string;
 }
 
-export interface Repository {
+interface Repository {
   directory?: string;
   type?: string;
   url: string;
@@ -22,7 +19,7 @@ export interface Repository {
  * Dists are properties of Packument.versions
  * they have all the info you need to download and validate the tarball
  */
-export interface Dist {
+interface Dist {
   // Deprecated?  (ref: found in uuid@0.0.2)
   bin?: Record<string, { shasum: string; tarball: string }>;
 
@@ -67,14 +64,14 @@ export interface Dist {
 
 // this is in the tarball or the project. it really could have anything in it.
 export interface PackageJSON {
-  author?: Maintainer | string;
+  author?: Contact | string;
   bin?: Record<string, string>;
   browser?: Record<string, string> | string;
-  bugs?: Contact | string;
+  bugs?: Omit<Contact, 'name'> | string;
   bundledDependencies?: string[] | boolean;
   bundleDependencies?: string[] | boolean;
   config?: Record<string, unknown>;
-  contributors?: Maintainer[] | string[];
+  contributors?: Contact[] | string[];
   cpu?: string[];
   dependencies?: Record<string, string>;
   description?: string;
@@ -104,11 +101,11 @@ export interface PackageJSON {
 export interface PackumentVersion extends PackageJSON {
   // bugs, author, contributors, and repository can be simple strings in
   // package.json, but not in registry metadata.
-  bugs?: Contact;
-  author?: Maintainer;
+  bugs?: Omit<Contact, 'name'>;
+  author?: Contact;
   // ref: Record type found in uuid@1.4.1 et al
   browser?: Record<string, string>;
-  contributors?: Maintainer[];
+  contributors?: Contact[];
   repository?: Repository;
   gitHead?: string;
   _id: string;
@@ -117,8 +114,8 @@ export interface PackumentVersion extends PackageJSON {
   // Optional (ref: not defined in uuid@1.4.0)
   _nodeVersion?: string;
 
-  _npmUser?: Maintainer;
-  maintainers?: Maintainer[];
+  _npmUser?: Contact;
+  maintainers?: Contact[];
   dist: Dist;
   readme?: string;
   readmeFilename?: string;
