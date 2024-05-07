@@ -15,8 +15,7 @@
     "pretest": "npm run build",
     "template-oss-apply": "template-oss-apply --force",
     "test": "tap",
-    "snap": "tap",
-    "prepare": "tshy"
+    "snap": "tap"
   },
   "keywords": [
     "npm registry",
@@ -41,7 +40,7 @@
     "typescript": "^5.4.5"
   },
   "files": [
-    "dist/"
+    "types/"
   ],
   "repository": {
     "type": "git",
@@ -50,11 +49,11 @@
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
     "version": "4.22.0",
-    "typescript": true,
-    "allowPaths": [
-      "/types/"
-    ]
+    "content": "./scripts/template-oss"
   },
   "type": "module",
-  "tap": {}
+  "tap": {
+    "typecheck": true,
+    "disable-coverage": true
+  }
 }

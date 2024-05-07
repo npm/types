@@ -1,11 +1,6 @@
-import * as assert from 'node:assert'
-import { exec as _exec, ExecException } from 'node:child_process'
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
-import { test } from 'node:test'
-import { promisify } from 'node:util'
-
-const exec = promisify(_exec)
+import { spawn } from 'node:child_process'
+import { resolve } from 'node:path'
+import t from 'tap'
 
 const REGISTRY = 'https://registry.npmjs.org'
 
@@ -20,7 +15,6 @@ const FIXTURES: FixtureEntry[] = [
   { name: 'not-licensed' },
   { name: 'tiny-tarball', version: '1.0.0' },
   { name: 'tiny-tarball' },
-
   // Legacy packages that have informed type declarations
   { name: 'uuid', version: '0.0.2' },
   { name: 'uuid', version: '1.4.1' },
@@ -33,37 +27,57 @@ const FIXTURES: FixtureEntry[] = [
  *    the appropriate type
  * 3. Runs `tsc` to validate registry data matches the type definition.
  */
-async function main () {
-  const { stdout } = await exec('git rev-parse --show-toplevel')
-  const rootDir = stdout.trim()
+t.test('fixtures', async (t) => {
+  const root = process.cwd()
+  const fixtures = await getFixtures()
 
-  process.chdir(join(rootDir, 'test'))
+  const dir = t.testdir({
+    'tsconfig-test.json': JSON.stringify({
+      compilerOptions: {
+        module: 'NodeNext',
+        moduleResolution: 'nodenext',
+        strict: true,
+        target: 'es2022',
+        noEmit: true,
+        rootDir: 'fixtures',
+      },
+      include: ['fixtures'],
+    }, null, 2),
+    fixtures: Object.fromEntries(Object.entries(fixtures).map(([k, v]) => [
+      k,
+      `import type * as npmTypes from '../../../../types/index.d.ts'\n${v}`,
+    ])),
+  })
 
-  await generateFixtures()
-  console.log('All fixtures generated')
-
-  test('fixtures compile', async () => {
-    // Validate all fixtures
-    try {
-      await exec('tsc --noEmit -p ./tsconfig-test.json')
-      console.log('All fixtures compiled successfully')
-    } catch (err) {
-      if (isExecException(err)) {
-        assert.fail(err.stdout)
-      } else {
-        throw err
-      }
+  t.test('snapshots', async t => {
+    for (const [k, v] of Object.entries(fixtures)) {
+      t.matchSnapshot(v, k)
     }
   })
-}
 
-async function generateFixtures () {
-  const template = await readFile('fixture-template.ts', 'utf-8')
+  t.test('tsc', async t => new Promise<void>(res => {
+    const proc = spawn(
+      resolve(root, './node_modules/.bin/tsc'),
+      ['--noEmit', '-p', './tsconfig-test.json'],
+      { cwd: dir }
+    )
+    let output = ''
+    proc.stdout.on('data', (d) => output += d.toString())
+    proc.on('close', (code) => {
+      if (code === 0) {
+        t.ok(true, 'tsc works')
+      } else {
+        t.fail(`tsc failed with code ${code} and message:\n${output}`)
+      }
+      res()
+    })
+  }))
+})
 
-  await mkdir('fixtures', { recursive: true })
+async function getFixtures () {
+  const fixtures: Record<string, string> = {}
 
-  for (const testEntry of FIXTURES) {
-    const { name, version } = testEntry
+  for (const { name, version } of FIXTURES) {
     const fixtureName = version ? `${name}@${version}` : name
 
     for (const manifestFormat of [false, true]) {
@@ -73,26 +87,23 @@ async function generateFixtures () {
         continue
       }
 
-      testEntry.manifestFormat = manifestFormat
+      const fixturePath = manifestFormat ? `${fixtureName}.manifest.ts` : `${fixtureName}.ts`
+      const tsType = manifestFormat
+        ? (version ? 'ManifestVersion' : 'Manifest')
+        : version ? 'PackumentVersion' : 'Packument'
 
-      let tsType = version ? 'PackumentVersion' : 'Packument'
-      let fixturePath = `fixtures/${fixtureName}.ts`
+      const pkg = await registryFetch({
+        name,
+        version,
+        manifestFormat,
+      })
 
-      if (manifestFormat) {
-        tsType = version ? 'ManifestVersion' : 'Manifest'
-        fixturePath = `fixtures/${fixtureName}.manifest.ts`
-      }
-
-      console.log(`Generating ${fixturePath}`)
-      const pkg = await registryFetch(testEntry)
-      const content = template
-        .replaceAll(/^\s*\/\/.*/gm, '')
-        .replace('TYPE', tsType)
-        .replace('DATA', JSON.stringify(pkg, null, 2))
-
-      await writeFile(fixturePath, content)
+      fixtures[fixturePath] =
+        `export const metadata: npmTypes.${tsType} = ${JSON.stringify(pkg, null, 2)}`
     }
   }
+
+  return fixtures
 }
 
 // Note: We could use `pacote` or `npm-registry-fetch` here, but this package is
@@ -115,9 +126,3 @@ async function registryFetch ({ name, version, manifestFormat }: FixtureEntry) {
 
   return await res.json()
 }
-
-function isExecException (err: unknown): err is ExecException {
-  return Boolean(err) && 'cmd' in (err as ExecException)
-}
-
-await main()
