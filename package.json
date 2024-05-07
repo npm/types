@@ -14,7 +14,9 @@
     "posttest": "npm run lint",
     "pretest": "npm run build",
     "template-oss-apply": "template-oss-apply --force",
-    "test": "node --test --enable-source-maps"
+    "test": "tap",
+    "snap": "tap",
+    "prepare": "tshy"
   },
   "keywords": [
     "npm registry",
@@ -34,10 +36,12 @@
     "@types/node": "20.12.10",
     "@typescript-eslint/parser": "^7.8.0",
     "eslint-import-resolver-typescript": "^3.6.1",
+    "tap": "^18.7.3",
+    "tshy": "^1.14.0",
     "typescript": "^5.4.5"
   },
   "files": [
-    "types/"
+    "dist/"
   ],
   "repository": {
     "type": "git",
@@ -46,8 +50,11 @@
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
     "version": "4.22.0",
-    "typescript": true
+    "typescript": true,
+    "allowPaths": [
+      "/types/"
+    ]
   },
   "type": "module",
-  "packageManager": "npm@10.7.0+sha256.f443ed4364ea11ac5cf7cae7fb4731278c64dd6839093f8a46eabde0430e0fcd"
+  "tap": {}
 }

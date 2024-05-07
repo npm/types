@@ -10,15 +10,18 @@ const localConfigs = readdir(__dirname)
 
 module.exports = {
   root: true,
-  ignorePatterns: ['dist/'],
+  ignorePatterns: [
+    'tap-testdir*/',
+    'dist/',
+  ],
   parser: '@typescript-eslint/parser',
   settings: {
     'import/resolver': {
       typescript: {},
     },
   },
-  rules: {
-    'max-len': 'off',
-  },
-  extends: ['@npmcli', ...localConfigs],
+  extends: [
+    '@npmcli',
+    ...localConfigs,
+  ],
 }

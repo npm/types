@@ -10,7 +10,10 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2022"
+    "target": "es2022",
+    "jsx": "react",
+    "declaration": true,
+    "declarationMap": true
   },
   "include": [
     "test/fixtures.test.ts"
