@@ -17,16 +17,16 @@ fetch('https://registry.npmjs.org/cookie)
 ## Types
 
 ### Packument
-Type for data returned from by the `https://registry.npmjs.org/:packageName` endpoint
+Response type for the `https://registry.npmjs.org/:packageName` endpoint
 
 ### PackumentVersion
-Type for data returned from by the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint.  Also the type of `Packument['versions']` entries.
+Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint.  Also the type of `Packument['versions']` entries.
 
 ### Manifest
-Type for data returned from by the `https://registry.npmjs.org/:packageName` _when made with the 'Accept: application/vnd.npm.install-v1+json' header_
+Response type for the `https://registry.npmjs.org/:packageName` endpoint, _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.
 
 ### ManifestVersion
-Type for data returned from by the `https://registry.npmjs.org/:packageName/:packageVersion` _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.   Also the type of `Manifest['versions']` entries.
+Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint, _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.   Also the type of `Manifest['versions']` entries.
 
 ### PackageJSON
 A "loose" definition of the "package.json" file type.
