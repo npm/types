@@ -18,14 +18,6 @@ export interface Repository {
   url: string;
 }
 
-interface Directories {
-  bin?: string;
-  doc?: string;
-  lib?: string;
-  man?: string;
-  test?: string;
-}
-
 /**
  * Dists are properties of Packument.versions
  * they have all the info you need to download and validate the tarball
@@ -87,7 +79,7 @@ export interface PackageJSON {
   dependencies?: Record<string, string>;
   description?: string;
   devDependencies?: Record<string, string>;
-  directories?: Directories;
+  directories?: Record<string, string>;
   engines?: Record<string, string>;
   files?: string[];
   homepage?: string;
