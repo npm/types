@@ -49,7 +49,8 @@
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
     "version": "4.22.0",
-    "content": "./scripts/template-oss"
+    "content": "./scripts/template-oss",
+    "publish": true
   },
   "type": "module",
   "tap": {
