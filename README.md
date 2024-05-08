@@ -7,7 +7,7 @@ For example:
 ```typescript
 import * as npm from '@npm/types';
 
-fetch('https://registry.npmjs.org/cookie)
+fetch('https://registry.npmjs.org/cookie')
   .then((res) => res.json())
   .then((obj: npm.Packument) => {
     // `obj` has proper registry types!
@@ -31,4 +31,5 @@ Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` 
 ### PackageJSON
 A "loose" definition of the "package.json" file type.
 
-> [!NOTE] This is not an authoritative definition of package.json structures.  It is merely a best-effort attempt to define the fields that may appear in `PackumentVersion` structures, are copied from a module's package.json file.
+> [!NOTE]
+> This is not an authoritative definition of package.json structures.  It is merely a best-effort attempt to define the fields that may appear in `PackumentVersion` structures, are copied from a module's package.json file.
