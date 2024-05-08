@@ -12,14 +12,7 @@ module.exports = {
   root: true,
   ignorePatterns: [
     'tap-testdir*/',
-    'dist/',
   ],
-  parser: '@typescript-eslint/parser',
-  settings: {
-    'import/resolver': {
-      typescript: {},
-    },
-  },
   extends: [
     '@npmcli',
     ...localConfigs,

@@ -14,10 +14,12 @@ tap-testdir*/
 !/.gitignore
 !/.npmrc
 !/.release-please-manifest.json
+!/bin/
 !/CHANGELOG*
 !/CODE_OF_CONDUCT.md
 !/CONTRIBUTING.md
 !/docs/
+!/lib/
 !/LICENSE*
 !/map.js
 !/package.json
@@ -25,7 +27,6 @@ tap-testdir*/
 !/release-please-config.json
 !/scripts/
 !/SECURITY.md
-!/src/
 !/tap-snapshots/
 !/test/
 !/tsconfig.json

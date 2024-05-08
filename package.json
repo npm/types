@@ -8,12 +8,12 @@
   },
   "scripts": {
     "lint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
-    "lintfix": "npm run lint -- --fix",
     "postlint": "template-oss-check",
-    "posttest": "npm run lint",
     "template-oss-apply": "template-oss-apply --force",
+    "lintfix": "npm run lint -- --fix",
+    "snap": "tap",
     "test": "tap",
-    "snap": "tap"
+    "posttest": "npm run lint"
   },
   "keywords": [
     "npm registry",
@@ -34,10 +34,11 @@
     "@typescript-eslint/parser": "^7.8.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "tap": "^18.7.3",
-    "tshy": "^1.14.0",
     "typescript": "^5.4.5"
   },
   "files": [
+    "bin/",
+    "lib/",
     "types/"
   ],
   "repository": {
@@ -47,7 +48,15 @@
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
     "version": "4.22.0",
-    "content": "./scripts/template-oss",
+    "allowPaths": [
+      "/types/"
+    ],
+    "distPaths": [
+      "types/"
+    ],
+    "latestCiVersion": 18,
+    "windowsCI": false,
+    "macCI": false,
     "publish": true
   },
   "type": "module",
