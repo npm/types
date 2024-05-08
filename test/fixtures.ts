@@ -5,13 +5,7 @@ import t from 'tap'
 
 const REGISTRY = 'https://registry.npmjs.org'
 
-type FixtureEntry = {
-  name: string;
-  version?: string;
-  manifestFormat?: boolean;
-};
-
-const FIXTURES: FixtureEntry[] = [
+const FIXTURES = [
   { name: 'not-licensed', version: '1.0.0' },
   { name: 'not-licensed' },
   { name: 'tiny-tarball', version: '1.0.0' },
@@ -40,63 +34,55 @@ t.test('fixtures', async (t) => {
         rootDir: 'fixtures',
       },
       include: ['fixtures'],
-    }, null, 2),
-    fixtures: Object.fromEntries(Object.entries(fixtures).map(([k, v]) => [
-      k,
-      `import type * as npmTypes from '../../../../types/index.d.ts'\n` +
-      `export const metadata: npmTypes.${v}`,
-    ])),
+    }),
+    fixtures: Object.fromEntries(
+      Object.entries(fixtures).map(([k, v]) => [
+        k,
+        `import type * as npmTypes from '../../../../types/index.d.ts'\n` +
+        `export const metadata: npmTypes.${v}`,
+      ])
+    ),
   })
 
-  t.test('snapshots', async t => {
+  t.test('snapshots', async (t) => {
     for (const [k, v] of Object.entries(fixtures)) {
       t.matchSnapshot(v, k)
     }
   })
 
-  t.test('tsc', async t => new Promise<void>(res => {
-    const proc = spawn(
-      resolve(root, './node_modules/.bin/tsc'),
-      ['--noEmit', '-p', './tsconfig-test.json'],
-      { cwd: dir }
-    )
-    let output = ''
-    proc.stdout.on('data', (d) => output += d.toString())
-    proc.on('close', (code) => {
-      if (code === 0) {
-        t.ok(true, 'tsc works')
-      } else {
-        t.fail(`tsc failed with code ${code} and message:\n${output}`)
-      }
-      res()
+  t.test('tsc', (t) =>
+    new Promise<void>((res) => {
+      const proc = spawn(
+        resolve(root, './node_modules/.bin/tsc'),
+        ['--noEmit', '-p', './tsconfig-test.json'],
+        { cwd: dir }
+      )
+      let output = ''
+      proc.stdout.on('data', (d) => (output += d.toString()))
+      proc.on('close', (code) => {
+        t.equal(code, 0, output)
+        res()
+      })
     })
-  }))
+  )
 })
 
 async function getFixtures () {
   const fixtures: Record<string, string> = {}
 
   for (const { name, version } of FIXTURES) {
-    const fixtureName = version ? `${name}@${version}` : name
+    const fixtureName = `${name}${version ? `@${version}` : ''}`
 
-    for (const manifestFormat of [false, true]) {
-      // Manifest format is only available for Packument documents, not
-      // PackumentVersions
-      if (manifestFormat && version) {
+    for (const corgi of [false, true]) {
+      // Corgis are only available for Packument documents, not PackumentVersions
+      if (corgi && version) {
         continue
       }
 
-      const fixturePath = manifestFormat ? `${fixtureName}.manifest.ts` : `${fixtureName}.ts`
-      const tsType = manifestFormat
-        ? (version ? 'ManifestVersion' : 'Manifest')
-        : version ? 'PackumentVersion' : 'Packument'
+      const pkg = await registryFetch(name, version, corgi)
 
-      const pkg = await registryFetch({
-        name,
-        version,
-        manifestFormat,
-      })
-
+      const fixturePath = `${fixtureName}${corgi ? '.manifest' : ''}.ts`
+      const tsType = `${corgi ? 'Manifest' : 'Packument'}${version ? 'Version' : ''}`
       fixtures[fixturePath] = `${tsType} = ${JSON.stringify(pkg, null, 2)}`
     }
   }
@@ -108,19 +94,14 @@ async function getFixtures () {
 // intended to document the types returned by registry requests.  Fetching URLs
 // directly here insures there's no manipulation of the data between the
 // registry and the fixture.
-async function registryFetch ({ name, version, manifestFormat }: FixtureEntry) {
-  const url = new URL(version ? `/${name}/${version}` : `/${name}`, REGISTRY)
-
-  const headers: Record<string, string> = {}
-  if (manifestFormat) {
-    headers.Accept = 'application/vnd.npm.install-v1+json'
-  }
-
-  const res = await fetch(url, { headers })
+async function registryFetch (name: string, version?: string, corgi?: boolean) {
+  const res = await fetch(`${REGISTRY}/${name}${version ? `/${version}` : ''}`, {
+    headers: corgi ? { Accept: 'application/vnd.npm.install-v1+json' } : {},
+  })
 
   if (!res.ok) {
-    throw new Error(`Fetch failed: ${url} (status: ${res.status})`)
+    throw new Error(`Fetch failed: ${res.url} (status: ${res.status})`)
   }
 
-  return await res.json()
+  return res.json()
 }
