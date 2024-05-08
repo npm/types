@@ -32,4 +32,4 @@ Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` 
 A "loose" definition of package.json structures.
 
 > [!NOTE]
-> This is not an authoritative definition of package.json structures.  Rather, it is a best-effort attempt to describe the fields that are de-facto standards for Node, NPM, and TypeScript development.
+> This is not an authoritative definition of package.json structures.  Rather, it is a best-effort attempt to describe the fields that are de-facto standards for Node.js, npm, and TypeScript development.
