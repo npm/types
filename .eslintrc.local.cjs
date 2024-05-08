@@ -5,10 +5,4 @@ module.exports = {
       typescript: {},
     },
   },
-  overrides: [{
-    files: ['test/fixtures/*.ts'],
-    rules: {
-      'max-len': 0,
-    },
-  }],
 }
