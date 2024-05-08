@@ -29,7 +29,7 @@ Response type for the `https://registry.npmjs.org/:packageName` endpoint, _when 
 Response type for the `https://registry.npmjs.org/:packageName/:packageVersion` endpoint, _when made with the 'Accept: application/vnd.npm.install-v1+json' header_.   Also the type of `Manifest['versions']` entries.
 
 ### PackageJSON
-A "loose" definition of the "package.json" file type.
+A "loose" definition of package.json structures.
 
 > [!NOTE]
-> This is not an authoritative definition of package.json structures.  It is merely a best-effort attempt to define the fields that may appear in `PackumentVersion` structures, are copied from a module's package.json file.
+> This is not an authoritative definition of package.json structures.  Rather, it is a best-effort attempt to describe the fields that are de-facto standards for Node, NPM, and TypeScript development.
