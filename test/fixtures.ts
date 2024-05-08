@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process'
-import { resolve } from 'node:path'
+import { readFile } from 'node:fs/promises'
+import { resolve, join } from 'node:path'
 import t from 'tap'
 
 const REGISTRY = 'https://registry.npmjs.org'
@@ -29,23 +30,21 @@ const FIXTURES: FixtureEntry[] = [
  */
 t.test('fixtures', async (t) => {
   const root = process.cwd()
+  const tsConfig = await readFile(join(root, 'tsconfig.json'), 'utf-8')
   const fixtures = await getFixtures()
 
   const dir = t.testdir({
     'tsconfig-test.json': JSON.stringify({
       compilerOptions: {
-        module: 'NodeNext',
-        moduleResolution: 'nodenext',
-        strict: true,
-        target: 'es2022',
-        noEmit: true,
+        ...JSON.parse(tsConfig).compilerOptions,
         rootDir: 'fixtures',
       },
       include: ['fixtures'],
     }, null, 2),
     fixtures: Object.fromEntries(Object.entries(fixtures).map(([k, v]) => [
       k,
-      `import type * as npmTypes from '../../../../types/index.d.ts'\n${v}`,
+      `import type * as npmTypes from '../../../../types/index.d.ts'\n` +
+      `export const metadata: npmTypes.${v}`,
     ])),
   })
 
@@ -98,8 +97,7 @@ async function getFixtures () {
         manifestFormat,
       })
 
-      fixtures[fixturePath] =
-        `export const metadata: npmTypes.${tsType} = ${JSON.stringify(pkg, null, 2)}`
+      fixtures[fixturePath] = `${tsType} = ${JSON.stringify(pkg, null, 2)}`
     }
   }
 

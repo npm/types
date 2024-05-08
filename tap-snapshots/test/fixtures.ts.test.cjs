@@ -6,7 +6,7 @@
  */
 'use strict'
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > not-licensed.manifest.ts 1`] = `
-export const metadata: npmTypes.Manifest = {
+Manifest = {
   "name": "not-licensed",
   "dist-tags": {
     "latest": "1.0.0"
@@ -33,7 +33,7 @@ export const metadata: npmTypes.Manifest = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > not-licensed.ts 1`] = `
-export const metadata: npmTypes.Packument = {
+Packument = {
   "_id": "not-licensed",
   "_rev": "3-5e8502a05053da7c2cb1b51f8a08a0ec",
   "name": "not-licensed",
@@ -123,7 +123,7 @@ export const metadata: npmTypes.Packument = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > not-licensed@1.0.0.ts 1`] = `
-export const metadata: npmTypes.PackumentVersion = {
+PackumentVersion = {
   "name": "not-licensed",
   "version": "1.0.0",
   "description": "an empty package without license metadata",
@@ -176,7 +176,7 @@ export const metadata: npmTypes.PackumentVersion = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > tiny-tarball.manifest.ts 1`] = `
-export const metadata: npmTypes.Manifest = {
+Manifest = {
   "name": "tiny-tarball",
   "dist-tags": {
     "latest": "1.0.0"
@@ -203,7 +203,7 @@ export const metadata: npmTypes.Manifest = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > tiny-tarball.ts 1`] = `
-export const metadata: npmTypes.Packument = {
+Packument = {
   "_id": "tiny-tarball",
   "_rev": "5-6e3e9084c69f16db2d53a953e67d0f9e",
   "name": "tiny-tarball",
@@ -275,7 +275,7 @@ export const metadata: npmTypes.Packument = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > tiny-tarball@1.0.0.ts 1`] = `
-export const metadata: npmTypes.PackumentVersion = {
+PackumentVersion = {
   "name": "tiny-tarball",
   "version": "1.0.0",
   "description": "tiny tarball used for health checks",
@@ -318,7 +318,7 @@ export const metadata: npmTypes.PackumentVersion = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > uuid@0.0.2.ts 1`] = `
-export const metadata: npmTypes.PackumentVersion = {
+PackumentVersion = {
   "name": "uuid",
   "description": "Simple libuuid bindings to allow UUIDs to be generated from JS.",
   "version": "0.0.2",
@@ -366,7 +366,7 @@ export const metadata: npmTypes.PackumentVersion = {
 `
 
 exports[`test/fixtures.ts > TAP > fixtures > snapshots > uuid@1.4.1.ts 1`] = `
-export const metadata: npmTypes.PackumentVersion = {
+PackumentVersion = {
   "name": "uuid",
   "version": "1.4.1",
   "description": "Rigorous implementation of RFC4122 (v1 and v4) UUIDs.",
