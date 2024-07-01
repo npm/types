@@ -103,7 +103,7 @@ export interface PackageJSON {
   directories?: Record<string, string>
   engines?: Record<string, string>
   files?: string[]
-  funding: Funding | string | (Funding | string)[]
+  funding?: Funding | string | (Funding | string)[]
   homepage?: string
   keywords?: string[]
   license?: string
