@@ -138,7 +138,7 @@ export interface PackumentVersion extends PackageJSON {
   _npmUser?: Contact
   _npmVersion: string
   author?: Contact
-  browser?: Record<string, string> // ref: Record type found in uuid@1.4.1 et al
+  browser?: string | Record<string, string> // ref: Record type found in uuid@1.4.1 et al
   bugs?: Omit<Contact, 'name'>
   contributors?: Contact[]
   deprecated?: string
