@@ -24,8 +24,8 @@ interface Funding {
 }
 
 // https://docs.npmjs.com/cli/v10/configuring-npm/package-json#overrides
-interface Override {
-  [moduleName: string]: string
+interface Overrides {
+  [moduleName: string]: string | Overrides
 }
 
 // https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependenciesmeta
@@ -113,7 +113,7 @@ export interface PackageJSON {
   name: string
   optionalDependencies?: Record<string, string>
   os?: string[]
-  overrides?: Record<string, Override | string>
+  overrides?: Overrides
   peerDependencies?: Record<string, string>
   peerDependenciesMeta?: Record<string, PeerDependencyMeta>
   private?: boolean
