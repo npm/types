@@ -1,3 +1,4 @@
+// https://docs.npmjs.com/cli/v10/configuring-npm/package-json#people-fields-author-contributors
 interface Contact {
   email?: string
   url?: string
@@ -9,9 +10,32 @@ interface Signature {
   sig: string
 }
 
+// https://docs.npmjs.com/cli/v10/configuring-npm/package-json#repository
 interface Repository {
   directory?: string
   type?: string
+  url: string
+}
+
+// https://docs.npmjs.com/cli/v10/configuring-npm/package-json#funding
+interface Funding {
+  type: string
+  url: string
+}
+
+// https://docs.npmjs.com/cli/v10/configuring-npm/package-json#overrides
+interface Overrides {
+  [moduleName: string]: string | Overrides
+}
+
+// https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependenciesmeta
+interface PeerDependencyMeta {
+  optional: boolean
+}
+
+// https://docs.npmjs.com/cli/v10/configuring-npm/package-json#license
+interface DeprecatedLicense {
+  type: string
   url: string
 }
 
@@ -20,7 +44,7 @@ interface Repository {
  * they have all the info you need to download and validate the tarball
  */
 interface Dist {
-  // Deprecated?  (ref: found in uuid@0.0.2)
+  // deprecated?  (ref: found in uuid@0.0.2)
   bin?: Record<string, { shasum: string; tarball: string }>
 
   /**
@@ -62,7 +86,7 @@ interface Dist {
   unpackedSize?: number
 }
 
-// this is in the tarball or the project. it really could have anything in it.
+// this is in the tarball for the project. it really could have anything in it.
 export interface PackageJSON {
   author?: Contact | string
   bin?: Record<string, string>
@@ -71,7 +95,7 @@ export interface PackageJSON {
   bundledDependencies?: string[] | boolean
   bundleDependencies?: string[] | boolean
   config?: Record<string, unknown>
-  contributors?: Contact[] | string[]
+  contributors?: (Contact | string)[]
   cpu?: string[]
   dependencies?: Record<string, string>
   description?: string
@@ -79,48 +103,51 @@ export interface PackageJSON {
   directories?: Record<string, string>
   engines?: Record<string, string>
   files?: string[]
+  funding?: Funding | string | (Funding | string)[]
   homepage?: string
   keywords?: string[]
   license?: string
+  licenses?: DeprecatedLicense | DeprecatedLicense[]
   main?: string
   man?: string | string[]
   name: string
   optionalDependencies?: Record<string, string>
   os?: string[]
+  overrides?: Overrides
   peerDependencies?: Record<string, string>
+  peerDependenciesMeta?: Record<string, PeerDependencyMeta>
   private?: boolean
   publishConfig?: Record<string, unknown>
   repository?: Repository | string
   scripts?: Record<string, string>
+  // https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html#editing-the-packagejson
   types?: string
   version: string
+  workspaces?: string[] | Record<string, string>
 
   [field: string]: unknown
 }
 
+// Note: Contacts (bugs, author, contributors, repository, etc) can be simple
+// strings in package.json, but not in registry metadata.
+
 export interface PackumentVersion extends PackageJSON {
-  // bugs, author, contributors, and repository can be simple strings in
-  // package.json, but not in registry metadata.
-  bugs?: Omit<Contact, 'name'>
-  author?: Contact
-  // ref: Record type found in uuid@1.4.1 et al
-  browser?: Record<string, string>
-  contributors?: Contact[]
-  repository?: Repository
-  gitHead?: string
+  _hasShrinkwrap?: boolean
   _id: string
-  _npmVersion: string
-
-  // Optional (ref: not defined in uuid@1.4.0)
-  _nodeVersion?: string
-
+  _nodeVersion?: string // optional (ref: not defined in uuid@1.4.0)
   _npmUser?: Contact
-  maintainers?: Contact[]
+  _npmVersion: string
+  author?: Contact
+  browser?: string | Record<string, string> // ref: Record type found in uuid@1.4.1 et al
+  bugs?: Omit<Contact, 'name'>
+  contributors?: Contact[]
+  deprecated?: string
   dist: Dist
+  gitHead?: string
+  maintainers?: Contact[]
   readme?: string
   readmeFilename?: string
-  _hasShrinkwrap?: boolean
-  deprecated?: string
+  repository?: Repository
 }
 
 // this is what you get from the npm api.
@@ -133,7 +160,7 @@ export type Packument = {
   users?: Record<string, true>
   versions: Record<string, PackumentVersion>
 
-  // The following fields are hoisted to the top-level of the packument from the latest version published.
+  // these fields are hoisted from the latest PackumentVersion
 } & Pick<
   PackumentVersion,
   | 'author'

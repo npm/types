@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process'
 import { readFile } from 'node:fs/promises'
-import { resolve, join } from 'node:path'
+import { join, resolve } from 'node:path'
 import t from 'tap'
 
 const REGISTRY = 'https://registry.npmjs.org'
@@ -83,7 +83,15 @@ async function getFixtures () {
 
       const fixturePath = `${fixtureName}${corgi ? '.manifest' : ''}.ts`
       const tsType = `${corgi ? 'Manifest' : 'Packument'}${version ? 'Version' : ''}`
-      fixtures[fixturePath] = `${tsType} = ${JSON.stringify(pkg, null, 2)}`
+      fixtures[fixturePath] = `${tsType} = ${JSON.stringify(
+        pkg,
+        function (k: string, v: unknown) {
+          return (!Array.isArray(v) && v && typeof v === 'object') ?
+            Object.fromEntries(
+              Object.entries(v).sort(([a], [b]) => a.localeCompare(b))
+            ) : v
+      },
+      2)}`
     }
   }
 

@@ -3,9 +3,6 @@
   "version": "1.0.2",
   "description": "Typescript definitions for npm registry content",
   "types": "./types/index.d.ts",
-  "exports": {
-    "./package.json": "./package.json"
-  },
   "scripts": {
     "lint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
     "postlint": "template-oss-check",
