@@ -31,7 +31,7 @@
     "@types/node": "22.1.0",
     "@typescript-eslint/parser": "^8.0.1",
     "eslint-import-resolver-typescript": "^3.6.1",
-    "tap": "^18.7.3",
+    "tap": "^21.0.1",
     "typescript": "^5.4.5"
   },
   "files": [
