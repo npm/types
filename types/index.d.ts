@@ -87,17 +87,17 @@ interface Dist {
 }
 
 interface DevEngines {
-  os?: DevEngineDependency | DevEngineDependency[];
-  cpu?: DevEngineDependency | DevEngineDependency[];
-  libc?: DevEngineDependency | DevEngineDependency[];
-  runtime?: DevEngineDependency | DevEngineDependency[];
-  packageManager?: DevEngineDependency | DevEngineDependency[];
+  os?: DevEngineDependency | DevEngineDependency[]
+  cpu?: DevEngineDependency | DevEngineDependency[]
+  libc?: DevEngineDependency | DevEngineDependency[]
+  runtime?: DevEngineDependency | DevEngineDependency[]
+  packageManager?: DevEngineDependency | DevEngineDependency[]
 }
 
 interface DevEngineDependency {
-  name: string;
-  version?: string;
-  onFail?: 'ignore' | 'warn' | 'error';
+  name: string
+  version?: string
+  onFail?: 'ignore' | 'warn' | 'error' | 'download'
 }
 
 // this is in the tarball for the project. it really could have anything in it.
