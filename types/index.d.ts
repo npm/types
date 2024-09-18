@@ -86,6 +86,20 @@ interface Dist {
   unpackedSize?: number
 }
 
+interface DevEngines {
+  os?: DevEngineDependency | DevEngineDependency[];
+  cpu?: DevEngineDependency | DevEngineDependency[];
+  libc?: DevEngineDependency | DevEngineDependency[];
+  runtime?: DevEngineDependency | DevEngineDependency[];
+  packageManager?: DevEngineDependency | DevEngineDependency[];
+}
+
+interface DevEngineDependency {
+  name: string;
+  version?: string;
+  onFail?: 'ignore' | 'warn' | 'error';
+}
+
 // this is in the tarball for the project. it really could have anything in it.
 export interface PackageJSON {
   author?: Contact | string
@@ -100,6 +114,7 @@ export interface PackageJSON {
   dependencies?: Record<string, string>
   description?: string
   devDependencies?: Record<string, string>
+  devEngines?: DevEngines
   directories?: Record<string, string>
   engines?: Record<string, string>
   files?: string[]
