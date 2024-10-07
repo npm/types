@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/npm/types/compare/v2.0.0...v2.1.0) (2024-10-07)
+### Features
+* [`9780470`](https://github.com/npm/types/commit/978047035dbe14c3dafb65eaa31413a5f8a9d197) [#85](https://github.com/npm/types/pull/85) add devEngines (#85) (@reggi)
+### Chores
+* [`6d3f319`](https://github.com/npm/types/commit/6d3f319a4e717e48da34cd636acfdc6e17e96362) [#78](https://github.com/npm/types/pull/78) bump @npmcli/eslint-config from 4.0.5 to 5.0.0 (@dependabot[bot])
+* [`d721997`](https://github.com/npm/types/commit/d721997881c582f0f10514c513fafbfd739e8332) [#79](https://github.com/npm/types/pull/79) postinstall for dependabot template-oss PR (@hashtagchris)
+* [`a7d8797`](https://github.com/npm/types/commit/a7d8797a1a800d066a19cb627637990da3d812a0) [#79](https://github.com/npm/types/pull/79) bump @npmcli/template-oss from 4.22.0 to 4.23.3 (@dependabot[bot])
+
 ## [2.0.0](https://github.com/npm/types/compare/v1.0.2...v2.0.0) (2024-08-07)
 
 ### ⚠️ BREAKING CHANGES
