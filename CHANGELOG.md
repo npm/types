@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/npm/types/compare/v2.0.0...v2.1.0) (2025-04-28)
+### Features
+* [`9780470`](https://github.com/npm/types/commit/978047035dbe14c3dafb65eaa31413a5f8a9d197) [#85](https://github.com/npm/types/pull/85) add devEngines (#85) (@reggi)
+### Chores
+* [`f8308cd`](https://github.com/npm/types/commit/f8308cdf83bead92de57d38bfba40755ee83ab40) [#115](https://github.com/npm/types/pull/115) postinstall workflow updates (#115) (@owlstronaut)
+* [`96d8414`](https://github.com/npm/types/commit/96d84144cdd03e0ff5ed098287c9529550a8220b) [#113](https://github.com/npm/types/pull/113) bump @types/node from 22.14.0 to 22.14.1 (#113) (@dependabot[bot])
+* [`b2b779e`](https://github.com/npm/types/commit/b2b779e667998606770e65fcbbbdce106582e724) [#111](https://github.com/npm/types/pull/111) bump eslint-import-resolver-typescript from 3.10.0 to 4.3.2 (#111) (@dependabot[bot])
+* [`1787777`](https://github.com/npm/types/commit/1787777be536e7465bd32d9f2e7dc282d767780e) [#110](https://github.com/npm/types/pull/110) bump @types/node from 22.1.0 to 22.14.0 (#110) (@dependabot[bot])
+* [`6d3f319`](https://github.com/npm/types/commit/6d3f319a4e717e48da34cd636acfdc6e17e96362) [#78](https://github.com/npm/types/pull/78) bump @npmcli/eslint-config from 4.0.5 to 5.0.0 (@dependabot[bot])
+* [`f85ed36`](https://github.com/npm/types/commit/f85ed36b1f38860a440c7e7805375eed2ffe98eb) [#112](https://github.com/npm/types/pull/112) bump @npmcli/template-oss from 4.23.3 to 4.24.3 (#112) (@dependabot[bot], @npm-cli-bot)
+* [`d721997`](https://github.com/npm/types/commit/d721997881c582f0f10514c513fafbfd739e8332) [#79](https://github.com/npm/types/pull/79) postinstall for dependabot template-oss PR (@hashtagchris)
+
 ## [2.0.0](https://github.com/npm/types/compare/v1.0.2...v2.0.0) (2024-08-07)
 
 ### ⚠️ BREAKING CHANGES
