@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@npmcli/eslint-config": "^5.0.0",
-    "@npmcli/template-oss": "4.24.4",
+    "@npmcli/template-oss": "4.25.0",
     "@types/node": "22.14.1",
     "@typescript-eslint/parser": "^8.0.1",
     "eslint-import-resolver-typescript": "^4.3.2",
@@ -45,7 +45,7 @@
   },
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
-    "version": "4.24.4",
+    "version": "4.25.0",
     "allowPaths": [
       "/types/"
     ],
