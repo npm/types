@@ -1,6 +1,6 @@
 {
   "name": "@npm/types",
-  "version": "2.1.0",
+  "version": "2.0.0",
   "description": "Typescript definitions for npm registry content",
   "types": "./types/index.d.ts",
   "scripts": {
@@ -23,11 +23,11 @@
   "author": "GitHub Inc.",
   "license": "MIT",
   "engines": {
-    "node": ">=18.6.0"
+    "node": "^20.17.0 || >=22.9.0"
   },
   "devDependencies": {
     "@npmcli/eslint-config": "^5.0.0",
-    "@npmcli/template-oss": "4.27.1",
+    "@npmcli/template-oss": "4.24.3",
     "@types/node": "22.14.1",
     "@typescript-eslint/parser": "^8.0.1",
     "eslint-import-resolver-typescript": "^4.3.2",
@@ -45,7 +45,7 @@
   },
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
-    "version": "4.27.1",
+    "version": "4.24.3",
     "allowPaths": [
       "/types/"
     ],
