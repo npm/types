@@ -117,13 +117,16 @@ export interface PackageJSON {
   devEngines?: DevEngines
   directories?: Record<string, string>
   engines?: Record<string, string>
+  exports?: Record<string, unknown> | string | (Record<string, unknown> | string)[]
   files?: string[]
   funding?: Funding | string | (Funding | string)[]
   homepage?: string
+  imports?: Record<string, unknown>
   keywords?: string[]
   license?: string
   licenses?: DeprecatedLicense | DeprecatedLicense[]
   main?: string
+  maintainers?: Contact[]
   man?: string | string[]
   name: string
   optionalDependencies?: Record<string, string>
@@ -135,6 +138,7 @@ export interface PackageJSON {
   publishConfig?: Record<string, unknown>
   repository?: Repository | string
   scripts?: Record<string, string>
+  type?: string
   // https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html#editing-the-packagejson
   types?: string
   version: string
