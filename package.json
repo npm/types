@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@npmcli/eslint-config": "^6.0.0",
-    "@npmcli/template-oss": "4.29.0",
+    "@npmcli/template-oss": "4.30.0",
     "@types/node": "22.14.1",
     "@typescript-eslint/parser": "^8.0.1",
     "eslint-import-resolver-typescript": "^4.3.2",
