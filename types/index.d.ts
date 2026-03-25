@@ -3,6 +3,10 @@ interface Contact {
   email?: string
   url?: string
   name: string
+  trustedPublisher?: {
+    id: string
+    oidcConfigId: string
+  } 
 }
 
 interface Signature {
@@ -84,6 +88,16 @@ interface Dist {
    * the unpacked size of the files in the tarball. >= 2018
    */
   unpackedSize?: number
+
+  /**
+  * https://docs.npmjs.com/generating-provenance-statements
+  */
+  attestations?: {
+    url: string
+    provenance: {
+      predicateType: string
+    }
+  }
 }
 
 interface DevEngineDependency {
