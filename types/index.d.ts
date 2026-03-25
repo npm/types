@@ -121,7 +121,7 @@ export interface PackageJSON {
   funding?: Funding | string | (Funding | string)[]
   homepage?: string
   keywords?: string[]
-  license?: string
+  license?: string | DeprecatedLicense
   licenses?: DeprecatedLicense | DeprecatedLicense[]
   main?: string
   man?: string | string[]
