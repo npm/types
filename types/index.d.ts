@@ -30,7 +30,7 @@ interface Overrides {
 
 // https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependenciesmeta
 interface PeerDependencyMeta {
-  optional: boolean
+  optional?: boolean
 }
 
 // https://docs.npmjs.com/cli/v10/configuring-npm/package-json#license
