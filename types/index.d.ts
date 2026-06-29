@@ -100,6 +100,75 @@ interface DevEngines {
   packageManager?: DevEngineDependency | DevEngineDependency[]
 }
 
+interface SearchUser {
+  email?: string
+  username: string
+}
+
+interface SearchTrustedPublisher {
+  oidcConfigId: string
+  id: string
+}
+
+interface SearchPublisher extends SearchUser {
+  trustedPublisher?: SearchTrustedPublisher
+}
+
+interface SearchPackageLinks {
+  bugs?: string
+  homepage?: string
+  npm?: string
+  repository?: string
+}
+
+interface SearchPackage {
+  name: string
+  scope?: string
+  version: string
+  description?: string
+  keywords?: string[]
+  date: string
+  links: SearchPackageLinks
+  author?: SearchUser
+  publisher: SearchPublisher
+  maintainers: SearchUser[]
+  license?: string
+  sanitized_name: string
+}
+
+interface SearchScore {
+  final: number
+  detail: {
+    popularity: number
+    quality: number
+    maintenance: number
+  }
+}
+
+interface SearchFlags {
+  insecure?: 0 | 1
+  unstable?: boolean
+}
+
+export interface SearchResult {
+  package: SearchPackage
+  score: SearchScore
+  searchScore: number
+  downloads?: {
+    monthly?: number
+    weekly?: number
+  }
+  dependents?: string | number
+  updated?: string
+  flags?: SearchFlags
+}
+
+export interface SearchResponse {
+  objects: SearchResult[]
+  total: number
+  time: string
+}
+
 // this is in the tarball for the project. it really could have anything in it.
 export interface PackageJSON {
   author?: Contact | string
