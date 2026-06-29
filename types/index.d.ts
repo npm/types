@@ -23,6 +23,12 @@ interface Funding {
   url: string
 }
 
+type PackageJSONExports =
+  | string
+  | string[]
+  | Record<string, string | string[] | PackageJSONExports>
+  | null
+
 // https://docs.npmjs.com/cli/v10/configuring-npm/package-json#overrides
 interface Overrides {
   [moduleName: string]: string | Overrides
@@ -125,6 +131,7 @@ export interface PackageJSON {
   licenses?: DeprecatedLicense | DeprecatedLicense[]
   main?: string
   man?: string | string[]
+  maintainers?: Contact[]
   name: string
   optionalDependencies?: Record<string, string>
   os?: string[]
@@ -137,6 +144,9 @@ export interface PackageJSON {
   scripts?: Record<string, string>
   // https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html#editing-the-packagejson
   types?: string
+  type?: 'commonjs' | 'module'
+  exports?: PackageJSONExports
+  imports?: Record<string, PackageJSONExports>
   version: string
   workspaces?: string[] | Record<string, string>
 
